@@ -67,7 +67,7 @@ public class TestSpringJpa {
 	public void t03UpdateClient() {
 		Client c = daoC.selectOne(1);
 		c.setPrenom("Marc");
-		daoC.udpate(c);
+		daoC.update(c);
 		List<Client> liste = daoC.selectAll();
 		for(Client i : liste ) {
 			System.out.println(i.toString());
@@ -113,7 +113,7 @@ public class TestSpringJpa {
 	public void t07UpdateLivre() {
 		Livre l = daoL.selectOne(1);
 		l.setTitre("Vingt mille lieux sous les mers");
-		daoL.udpate(l);
+		daoL.update(l);
 		List<Livre> liste = daoL.selectAll();
 		for(Livre i : liste) {
 			System.out.println(i.toString());
@@ -161,7 +161,7 @@ public class TestSpringJpa {
 	public void t11UpdateEmprunt() {
 		Emprunt e = daoE.selectOne(1);
 		e.setDatedebut(new Date(2010, 01, 01));
-		daoE.udpate(e);
+		daoE.update(e);
 		List<Emprunt> liste = daoE.selectAll();
 		for(Emprunt i : liste) {
 			System.out.println(i.toString());
@@ -179,5 +179,112 @@ public class TestSpringJpa {
 			System.out.println(i.toString());
 		}
 	}
+	
+	////////////////////////////////////RELATIONS ENTRE TABLES
 
+	@Test
+	public void t13AddLivresEmpruntsClientAndCombineThem() {
+		Client c1 = new Client();
+		c1.setNom("LB");
+		c1.setPrenom("Ben");
+		
+		Client c2 = new Client();
+		c2.setNom("LB");
+		c2.setPrenom("Vince");
+		
+		
+		Livre l1 = new Livre();
+		l1.setAuteur("Jules Verne");
+		l1.setTitre("Voyage au centre de la Terre");
+			
+		Livre l2 = new Livre();
+		l2.setAuteur("William Gibson");
+		l2.setTitre("Neuromancien");
+		
+		Livre l3 = new Livre();
+		l3.setAuteur("Barnard Clavel");
+		l3.setTitre("Amarok");
+			
+		Livre l4 = new Livre();
+		l4.setAuteur("Simenon");
+		l4.setTitre("Les frères Rico");
+		
+
+		daoL.add(l1);
+		daoL.add(l2);
+		daoL.add(l3);
+		daoL.add(l4);
+		
+		daoC.add(c1);
+		daoC.add(c2);
+		
+		
+		//un 1er emprunt (c1 emprunte)
+		Emprunt e1 = new Emprunt();
+		e1.setDatedebut(new Date());
+		e1.setDatefin(new Date());
+		e1.setDelai(5);
+		daoE.add(e1);
+		
+		e1.getLivresE().add(l1);
+		l1.getEmpruntLivres().add(e1);
+		daoL.update(l1);
+		
+		e1.getLivresE().add(l2);
+		l2.getEmpruntLivres().add(e1);
+		daoL.update(l2);
+		
+		e1.getLivresE().add(l3);
+		l3.getEmpruntLivres().add(e1);
+		daoL.update(l3);
+		
+		daoE.update(e1);
+		
+		c1.getEmprunts().add(e1);
+		e1.setClientE(c1);
+		daoC.update(c1);
+		daoE.update(e1);
+		
+		
+		//un 2ème emprunt (c2 emprunte)
+		Emprunt e2 = new Emprunt();
+		e2.setDatedebut(new Date());
+		e2.setDatefin(new Date());
+		e2.setDelai(5);
+		daoE.add(e2);
+		
+		e2.getLivresE().add(l3);
+		l3.getEmpruntLivres().add(e2);
+		daoL.update(l3);
+		
+		daoE.update(e2);
+		
+		c2.getEmprunts().add(e2);
+		e2.setClientE(c2);
+		daoC.update(c2);
+		daoE.update(e2);
+		
+		
+		//un 3ème emprunt (c1 emprunte à nouveau)
+		Emprunt e3 = new Emprunt();
+		e3.setDatedebut(new Date());
+		e3.setDatefin(new Date());
+		e3.setDelai(5);
+		daoE.add(e3);
+		
+		e3.getLivresE().add(l2);
+		l2.getEmpruntLivres().add(e3);
+		daoL.update(l2);
+		
+		e3.getLivresE().add(l4);
+		l4.getEmpruntLivres().add(e3);
+		daoL.update(l4);
+		
+		daoE.update(e3);
+		
+		c1.getEmprunts().add(e3);
+		e3.setClientE(c1);
+		daoC.update(c1);
+		daoE.update(e3);
+	}
 }

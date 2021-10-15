@@ -44,10 +44,11 @@ public class DaoLivre implements ICrud<Livre> {
 	}
 
 	@Override
-	public void udpate(Livre o) {
+	public void update(Livre o) {
 		Livre l = em.find(Livre.class, o.getId());
 		l.setAuteur(o.getAuteur());
 		l.setTitre(o.getTitre());
+		l.setEmpruntLivres(o.getEmpruntLivres());
 		em.merge(l);
 		System.err.println("update Livre with id " + l.getId());
 		

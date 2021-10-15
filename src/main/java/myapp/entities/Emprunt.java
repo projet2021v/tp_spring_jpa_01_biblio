@@ -98,7 +98,6 @@ public class Emprunt {
 
 	public void setClientE(Client clientE) {
 		this.clientE = clientE;
-//		clientE.getEmprunts().add(this);
 	}
 
 	
@@ -124,11 +123,6 @@ public class Emprunt {
 
 	public void setLivresE(Set<Livre> livresE) {
 		this.livresE = livresE;
-//		if(!this.livresE.isEmpty()) {
-//			for(Livre l : livresE) {
-//				l.getEmpruntLivres().add(this);
-//			}
-//		}
 	}
 	
 	

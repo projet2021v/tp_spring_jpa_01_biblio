@@ -44,7 +44,7 @@ public class DaoClient implements ICrud<Client> {
 	}
 
 	@Override
-	public void udpate(Client o) {
+	public void update(Client o) {
 		Client c = em.find(Client.class, o.getId());
 		c.setNom(o.getNom());
 		c.setPrenom(o.getPrenom());

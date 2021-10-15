@@ -52,7 +52,7 @@ public class TestDaoClient {
 	public void t03UpdateClient() {
 		Client c = daoC.selectOne(1);
 		c.setPrenom("Marc");
-		daoC.udpate(c);
+		daoC.update(c);
 		List<Client> liste = daoC.selectAll();
 		for(Client i : liste ) {
 			System.out.println(i.toString());

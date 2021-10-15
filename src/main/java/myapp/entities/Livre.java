@@ -95,11 +95,6 @@ public class Livre {
 
 	public void setEmpruntLivres(Set<Emprunt> empruntLivres) {
 		this.empruntLivres = empruntLivres;
-//		if(!this.empruntLivres.isEmpty()) {
-//			for(Emprunt e : empruntLivres) {
-//				e.getLivresE().add(this);
-//			}
-//		}
 	}
 	
 	

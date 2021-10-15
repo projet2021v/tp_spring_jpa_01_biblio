@@ -44,11 +44,13 @@ public class DaoEmprunt implements ICrud<Emprunt> {
 	}
 
 	@Override
-	public void udpate(Emprunt o) {
+	public void update(Emprunt o) {
 		Emprunt e = em.find(Emprunt.class, o.getId());
 		e.setDatedebut(o.getDatedebut());
 		e.setDatefin(o.getDatefin());
 		e.setDelai(o.getDelai());
+		e.setClientE(o.getClientE());
+		e.setLivresE(o.getLivresE());
 		em.merge(e);
 		System.err.println("update Emprunt with id " + e.getId());
 	}

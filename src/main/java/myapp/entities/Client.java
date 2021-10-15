@@ -30,11 +30,6 @@ public class Client {
 
 	public void setEmprunts(Set<Emprunt> emprunts) {
 		this.emprunts = emprunts;
-//		if(!this.emprunts.isEmpty()) {
-//			for(Emprunt e : emprunts) {
-//				e.setClientE(this);
-//			}
-//		}
 	}
 
 	public Client() {

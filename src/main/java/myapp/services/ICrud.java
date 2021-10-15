@@ -9,7 +9,7 @@ public interface ICrud<Object> {
 	Object add(Object o);
 	Object selectOne(int id);
 	List<Object> selectAll();
-	void udpate(Object o);
+	void update(Object o);
 	void delete(Object o);
 	
 }
