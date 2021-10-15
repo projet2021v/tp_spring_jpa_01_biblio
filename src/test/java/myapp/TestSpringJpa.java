@@ -202,7 +202,7 @@ public class TestSpringJpa {
 		l2.setTitre("Neuromancien");
 		
 		Livre l3 = new Livre();
-		l3.setAuteur("Barnard Clavel");
+		l3.setAuteur("Bernard Clavel");
 		l3.setTitre("Amarok");
 			
 		Livre l4 = new Livre();

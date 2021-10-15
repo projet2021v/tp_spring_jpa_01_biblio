@@ -33,39 +33,26 @@ public class Emprunt {
 	
 	private int delai;
 	
-	/**
-	 * clientE est un nom unique
-	 * dans toutes mes entities
-	 * car je vais utiliser
-	 * "mappedBy"
-	 * 
-	 * REGLE @ManytoOne :  de relation
-	 */
 	@ManyToOne
 	@JoinColumn(name="id_client")
 	private Client clientE; //Un lient FK : clé étrangére vers l'entite Client
 	
-	/**
-	 * par mappedBy="empruntLivres"
-	 * je récupère automatiquement
-	 * les livres empruntés
-	 */
 	@ManyToMany(mappedBy="empruntLivres")
 	private Set<Livre> livresE;
 
-
 	public Emprunt() {
-		super();
-		// TODO Auto-generated constructor stub
-		livresE = new HashSet<Livre>();
+		this.livresE = new HashSet<Livre>();
+	}
+
+	public Emprunt(Date datedebut, Date datefin, int delai) {
+		this.datedebut = datedebut;
+		this.datefin = datefin;
+		this.delai = delai;
+		this.livresE = new HashSet<Livre>();
 	}
 
 	public int getId() {
 		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 
 	public Date getDatedebut() {
@@ -100,8 +87,14 @@ public class Emprunt {
 		this.clientE = clientE;
 	}
 
+	public Set<Livre> getLivresE() {
+		return livresE;
+	}
 	
-
+	public void setLivresE(Set<Livre> livresE) {
+		this.livresE = livresE;
+	}
+	
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -116,15 +109,4 @@ public class Emprunt {
 		builder.append("]");
 		return builder.toString();
 	}
-
-	public Set<Livre> getLivresE() {
-		return livresE;
-	}
-
-	public void setLivresE(Set<Livre> livresE) {
-		this.livresE = livresE;
-	}
-	
-	
-
 }

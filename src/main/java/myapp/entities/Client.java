@@ -24,33 +24,18 @@ public class Client {
 	@OneToMany(mappedBy="clientE")
 	private Set<Emprunt> emprunts;
 	
-	public Set<Emprunt> getEmprunts() {
-		return emprunts;
-	}
-
-	public void setEmprunts(Set<Emprunt> emprunts) {
-		this.emprunts = emprunts;
-	}
-
 	public Client() {
-		super();
-		// TODO Auto-generated constructor stub*
-		/**
-		 * Instancie emprunts
-		 * pour éviter des collections
-		 * à nullet des incohérences
-		 * quand le client a rien
-		 * emprunter
-		 */
-		emprunts = new HashSet<Emprunt>();
+		this.emprunts = new HashSet<Emprunt>();
+	}
+
+	public Client(String nom, String prenom) {
+		this.nom = nom;
+		this.prenom = prenom;
+		this.emprunts = new HashSet<Emprunt>();
 	}
 
 	public int getId() {
 		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 
 	public String getNom() {
@@ -67,6 +52,14 @@ public class Client {
 
 	public void setPrenom(String prenom) {
 		this.prenom = prenom;
+	}
+
+	public Set<Emprunt> getEmprunts() {
+		return emprunts;
+	}
+	
+	public void setEmprunts(Set<Emprunt> emprunts) {
+		this.emprunts = emprunts;
 	}
 
 	@Override

@@ -16,10 +16,6 @@ import javax.persistence.JoinColumn;
 @Entity
 @Table(name="livre")
 public class Livre {
-	/**
-	 * @Id : KP
-	 * @GeneratedValue(strategy=GenerationType.IDENTITY) ) AUTOINCREMENTAL
-	 */
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
@@ -30,45 +26,24 @@ public class Livre {
 	@Column(name = "titre", length = 255,nullable = false)
 	private String titre;
 	
-	/**
-	 * REGLE DE TABLE DE JONCTION N,N
-	 * 1 Livre -> n Emprunt(s)
-	 * 1 Emprunt ->  n Livre(s)
-	 */
 	@ManyToMany
 	@JoinTable(name="compo",
-	joinColumns= @JoinColumn(name="id_liv", referencedColumnName="id"),
-	inverseJoinColumns= @JoinColumn(name="id_emp", referencedColumnName="id")
-	)
+		joinColumns= @JoinColumn(name="id_liv", referencedColumnName="id"),
+		inverseJoinColumns= @JoinColumn(name="id_emp", referencedColumnName="id"))
 	private Set<Emprunt> empruntLivres;
 	
-
 	public Livre() {
-		super();
-		// TODO Auto-generated constructor stub
 		empruntLivres = new HashSet<Emprunt>();
 	}
-	
-	
+		
 	public Livre(String auteur, String titre) {
-		super();
 		this.auteur = auteur;
 		this.titre = titre;
+		empruntLivres = new HashSet<Emprunt>();
 	}
-
-
-	@Override
-	public String toString() {
-		return "Livre [id=" + id + ", auteur=" + auteur + ", titre=" + titre + "]";
-	}
-
 
 	public int getId() {
 		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 
 	public String getAuteur() {
@@ -87,15 +62,17 @@ public class Livre {
 		this.titre = titre;
 	}
 
-
 	public Set<Emprunt> getEmpruntLivres() {
 		return empruntLivres;
 	}
-
-
+	
 	public void setEmpruntLivres(Set<Emprunt> empruntLivres) {
 		this.empruntLivres = empruntLivres;
 	}
 	
+	@Override
+	public String toString() {
+		return "Livre [id=" + id + ", auteur=" + auteur + ", titre=" + titre + "]";
+	}
 	
 }
