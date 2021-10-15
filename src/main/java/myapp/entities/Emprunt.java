@@ -35,7 +35,7 @@ public class Emprunt {
 	
 	@ManyToOne
 	@JoinColumn(name="id_client")
-	private Client clientE; //Un lient FK : clé étrangére vers l'entite Client
+	private Client clientE;
 	
 	@ManyToMany(mappedBy="empruntLivres")
 	private Set<Livre> livresE;

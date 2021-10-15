@@ -62,7 +62,6 @@ public class SpringConfiguration {
 	/**
 	 * 
 	 * Construction d'un gestionnaire de transaction en lien avec la factory
-	 * @return
 	 */
 	@Bean
 	public PlatformTransactionManager transactionManager(EntityManagerFactory emf) {
